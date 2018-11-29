@@ -31,9 +31,13 @@ public class MainController {
     private String errorMessage;
 
     @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
-    public String index(Model model) {
+    public String index() {
 
-        model.addAttribute("message", message);
+        return "startPage";
+    }
+
+    @RequestMapping(value = { "/timeEntry" }, method = RequestMethod.GET)
+    public String timeEntry() {
 
         return "index";
     }
