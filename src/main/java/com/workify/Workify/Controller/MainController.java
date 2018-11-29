@@ -1,7 +1,9 @@
 package com.workify.Workify.Controller;
 
+import com.workify.Workify.Entity.Customer;
 import com.workify.Workify.Entity.Project;
 import com.workify.Workify.Entity.TimePiece;
+import com.workify.Workify.Repository.CustomerRepository;
 import com.workify.Workify.Repository.ProjectRepository;
 import com.workify.Workify.Repository.TimePieceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +26,14 @@ public class MainController {
     @Autowired
     TimePieceRepository timeRepo;
 
-    @Value("${welcome.message}")
-    private String message;
+    @Autowired
+    CustomerRepository custRepo;
 
-    @Value("${error.message}")
-    private String errorMessage;
 
     @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
-    public String index() {
+    public String startPage() {
+
+        custRepo.save( new Customer("Moritz", "Bührer", "Bührer Inc.", "Kasierstuhlstr", "79279","Freiburg"));
 
         return "startPage";
     }
@@ -39,7 +41,7 @@ public class MainController {
     @RequestMapping(value = { "/timeEntry" }, method = RequestMethod.GET)
     public String timeEntry() {
 
-        return "index";
+        return "timeEntry";
     }
 
     @RequestMapping(value = {"/timestamp"}, method = RequestMethod.GET)
