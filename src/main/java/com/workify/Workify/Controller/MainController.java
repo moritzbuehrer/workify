@@ -33,16 +33,11 @@ public class MainController {
     @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
     public String startPage() {
 
-        custRepo.save( new Customer("Moritz", "Bührer", "Bührer Inc.", "Kasierstuhlstr", "79279","Freiburg"));
+        //custRepo.save( new Customer("Moritz", "Bührer", "Bührer Inc.", "Kasierstuhlstr", "79279","Freiburg"));
 
-        return "startPage";
+        return "index";
     }
 
-    @RequestMapping(value = { "/timeEntry" }, method = RequestMethod.GET)
-    public String timeEntry() {
-
-        return "timeEntry";
-    }
 
     @RequestMapping(value = {"/timestamp"}, method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
@@ -55,8 +50,6 @@ public class MainController {
         TimePiece tp = new TimePiece("First Timepiece", new Date(), 5L, project);
 
         timeRepo.save(tp);
-
-
 
     }
 }
