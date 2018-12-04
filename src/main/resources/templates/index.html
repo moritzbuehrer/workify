@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -15,6 +15,10 @@
     <link href="/webjars/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="/webjars/nprogress/nprogress.css" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="/webjars/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- bootstrap-datetimepicker -->
+    <link href="/webjars/Eonasdan-bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="/css/custom.min.css" rel="stylesheet">
@@ -36,7 +40,7 @@
                 <div data-th-replace="fragments/fragment-menu-profile-quick-info :: menu-profile-quick-info"></div>
                 <!-- /menu profile quick info -->
 
-                <br />
+                <br/>
 
                 <!-- sidebar menu -->
                 <div data-th-replace="fragments/fragment-sidebar-menu :: sidebar-menu"></div>
@@ -78,12 +82,13 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Plain Page</h2>
+                                <h2>Time Tracking</h2>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                     </li>
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                           aria-expanded="false"><i class="fa fa-wrench"></i></a>
                                         <ul class="dropdown-menu" role="menu">
                                             <li><a href="#">Settings 1</a>
                                             </li>
@@ -97,37 +102,104 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
-                                Add content to the page ...
+                                <br/>
+                                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="timeTitle">Title
+                                            <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" id="timeTitle" required="required"
+                                                   class="form-control col-md-7 col-xs-12" name="title">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="timeDescription">Description </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" id="timeDescription" name="desc"
+                                                   class="form-control col-md-7 col-xs-12">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="dateTime"
+                                               class="control-label col-md-3 col-sm-3 col-xs-12">Date</label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12 input-group date" id="myDatepicker2">
+                                            <input type='text' id="dateTime" class="form-control col-md-7 col-xs-12" name="date"/>
+                                            <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="dateTime"
+                                               class="control-label col-md-3 col-sm-3 col-xs-12">Date</label>
+                                        <div class='col-md-6 col-sm-6 col-xs-12 input-group date' id='myDatepicker3'>
+                                            <input type='text' class="form-control" name="time"/>
+                                            <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                            <button class="btn btn-primary" type="reset">Reset</button>
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                        </div>
+                                    </div>
+
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- /page content -->
-
-        <!-- footer content -->
-        <footer>
-            <div class="pull-right">
-                Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-            </div>
-            <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
     </div>
+    <!-- /page content -->
+
+    <!-- footer content -->
+    <footer>
+        <div class="pull-right">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+        </div>
+        <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
+</div>
 </div>
 
 <!-- jQuery -->
-<script src="webjars/jquery/jquery.min.js"></script>
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="/webjars/jquery/2.2.3/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 <!-- FastClick -->
 <script src="/webjars/fastclick/fastclick.js"></script>
 <!-- NProgress -->
 <script src="/webjars/nprogress/nprogress.js"></script>
+<!-- bootstrap-daterangepicker -->
+<script src="/webjars/moment/min/moment.min.js"></script>
+<script src="/webjars/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- bootstrp-datetimepicker -->
+<script src="/webjars/Eonasdan-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
 
 <!-- Custom Theme Scripts -->
 <script src="/js/custom.min.js"></script>
+<script>
+    $('#myDatepicker2').datetimepicker({
+        format: 'DD.MM.YYYY'
+    });
+
+    $('#myDatepicker3').datetimepicker({
+        format: 'HH:mm'
+    });
+</script>
 
 </body>
 </html>
