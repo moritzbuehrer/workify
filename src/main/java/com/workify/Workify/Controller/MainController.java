@@ -60,11 +60,13 @@ public class MainController {
     @RequestMapping(value = "/insertTime", method = RequestMethod.POST)
     public String insertTime(@ModelAttribute("timeform") TimeFrom timeForm, BindingResult bindingResult){
 
+        //Errorhandling
         if (bindingResult.hasErrors()){
             System.out.println(bindingResult.toString());
             return "index";
         }
 
+        //Calculate Timedifference
         SimpleDateFormat format = new SimpleDateFormat("HH:mm");
         Date date1 = null;
         Date date2 = null;
@@ -76,8 +78,11 @@ public class MainController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        double differenceHours = difference/3600000.0;
 
-        System.out.println(difference/3600000.0);
+
+
+        //Insert to Database
 
         return "index";
     }
