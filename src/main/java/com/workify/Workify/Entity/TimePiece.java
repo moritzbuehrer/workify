@@ -10,7 +10,7 @@ public class TimePiece {
     private Long id;
     private String comment;
     private Date date;
-    private Long duration;
+    private Double duration;
 
     @ManyToOne
     @JoinColumn(name = "project_id")
@@ -20,7 +20,7 @@ public class TimePiece {
 
     }
 
-    public TimePiece(String comment, Date date, Long duration, Project project) {
+    public TimePiece(String comment, Date date, Double duration, Project project) {
         this.comment = comment;
         this.date = date;
         this.duration = duration;

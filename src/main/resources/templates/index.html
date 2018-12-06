@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -103,21 +103,23 @@
                             </div>
                             <div class="x_content">
                                 <br/>
-                                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                    <form id="demo-form2" action="#" th:action="@{/insertTime}" th:object="${timeform}"
+                                          method="post" data-parsley-validate class="form-horizontal form-label-left">
 
                                     <div class="form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="timeTitle">Title
-                                            <span class="required">*</span>
-                                        </label>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Project</label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="text" id="timeTitle" required="required"
-                                                   class="form-control col-md-7 col-xs-12" name="title">
+                                            <select class="form-control" th:field="*{projectId}">
+                                                <option th:each="project : ${projects}" th:value="${project.id}" th:text="${project.name}"></option>
+                                            </select>
                                         </div>
                                     </div>
+
+
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="timeDescription">Description </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="text" id="timeDescription" name="desc"
+                                            <input type="text" id="timeDescription" th:field="*{comment}"
                                                    class="form-control col-md-7 col-xs-12">
                                         </div>
                                     </div>
@@ -126,7 +128,18 @@
                                         <label for="dateTime"
                                                class="control-label col-md-3 col-sm-3 col-xs-12">Date</label>
                                         <div class="col-md-6 col-sm-6 col-xs-12 input-group date" id="myDatepicker2">
-                                            <input type='text' id="dateTime" class="form-control col-md-7 col-xs-12" name="date"/>
+                                            <input type='text' id="dateTime" class="form-control col-md-7 col-xs-12" th:field="*{date}" />
+                                            <span class="input-group-addon ">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="dateTime"
+                                               class="control-label col-md-3 col-sm-3 col-xs-12">Time from</label>
+                                        <div class='col-md-6 col-sm-6 col-xs-12 input-group date' id='myDatepicker3'>
+                                            <input type='text' class="form-control" th:field="*{fromTime}" />
                                             <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
@@ -135,12 +148,12 @@
 
                                     <div class="form-group">
                                         <label for="dateTime"
-                                               class="control-label col-md-3 col-sm-3 col-xs-12">Date</label>
-                                        <div class='col-md-6 col-sm-6 col-xs-12 input-group date' id='myDatepicker3'>
-                                            <input type='text' class="form-control" name="time"/>
+                                               class="control-label col-md-3 col-sm-3 col-xs-12">Time to</label>
+                                        <div class='col-md-6 col-sm-6 col-xs-12 input-group date' id='myDatepicker4'>
+                                            <input type='text' class="form-control" th:field="*{toTime}" />
                                             <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
                                         </div>
                                     </div>
 
@@ -197,6 +210,10 @@
     });
 
     $('#myDatepicker3').datetimepicker({
+        format: 'HH:mm'
+    });
+
+    $('#myDatepicker4').datetimepicker({
         format: 'HH:mm'
     });
 </script>
