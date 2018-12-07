@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class MainController {
@@ -66,34 +67,47 @@ public class MainController {
             return "index";
         }
 
-        //Calculate Timedifference
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-        Date date1 = null;
-        Date date2 = null;
+        //Handle Dates
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat format1 = new SimpleDateFormat("dd.MM.yyyy");
+
+        Date timeFrom = null;
+        Date timeTo = null;
+        Date date = null;
         double difference = 0;
         try {
-            date1 = format.parse(timeForm.getFromTime());
-            date2 = format.parse(timeForm.getToTime());
-            difference = date2.getTime() - date1.getTime();
+
+            timeFrom = timeFormat.parse(timeForm.getFromTime());
+            timeTo = timeFormat.parse(timeForm.getToTime());
+            difference = timeTo.getTime() - timeFrom.getTime();
+
+            date = format1.parse(timeForm.getDate());
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
         double differenceHours = difference/3600000.0;
 
+        //Get Project
+        Optional<Project> project = projRepo.findById( Long.parseLong(timeForm.getProjectId()) );
+        Project pro = project.get();
 
+        TimePiece timePiece = new TimePiece(timeForm.getComment(), date, differenceHours, pro);
 
         //Insert to Database
+        timeRepo.save(timePiece);
 
-        return "index";
+        return "timeView";
     }
 
-    @RequestMapping(value = {"/timestamp"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/timeView"}, method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public void timestamp(){
+    public String timeView(Model model){
 
-        Project project = new Project();
+        List<TimePiece> timePieces = timeRepo.findAll();
 
-        projRepo.save( project );
+        model.addAttribute("tableEntries", timePieces);
 
+        return "timeView";
     }
 }

@@ -10,7 +10,7 @@ public class TimePiece {
     private Long id;
     private String comment;
     private Date date;
-    private Double duration;
+    private double duration;
 
     @ManyToOne
     @JoinColumn(name = "project_id")
@@ -20,10 +20,50 @@ public class TimePiece {
 
     }
 
-    public TimePiece(String comment, Date date, Double duration, Project project) {
+    public TimePiece(String comment, Date date, double duration, Project project) {
         this.comment = comment;
         this.date = date;
         this.duration = duration;
+        this.project = project;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Double getDuration() {
+        return duration;
+    }
+
+    public void setDuration(double duration) {
+        this.duration = duration;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
         this.project = project;
     }
 }
