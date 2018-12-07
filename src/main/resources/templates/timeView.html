@@ -110,6 +110,7 @@
                                         <th>Comment</th>
                                         <th>Date</th>
                                         <th>Duration</th>
+                                        <th>#Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -119,6 +120,11 @@
                                         <td th:text="${entry.comment}"></td>
                                         <td th:text="${entry.date}"></td>
                                         <td th:text="${entry.duration}"></td>
+                                        <td>
+                                            <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+                                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>

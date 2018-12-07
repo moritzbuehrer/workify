@@ -38,8 +38,8 @@ public class MainController {
     CustomerRepository custRepo;
 
 
-    @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
-    public String startPage(Model model) {
+    @RequestMapping(value = { "/setup" }, method = RequestMethod.GET)
+    public void setup() {
 
         //Test Data
         Customer cust1 = new Customer("Moritz", "Bührer", "Bührer Inc.", "Kasierstuhlstr", "79279","Freiburg");
@@ -49,8 +49,10 @@ public class MainController {
         projRepo.save( new Project("Second Project", "Desc second Proj", cust1));
         projRepo.save( new Project("Third Project", "Desc third Proj", cust1));
 
-        //---------------------------------------------------------------------------------------------------
+    }
 
+    @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
+    public String startPage(Model model) {
 
         model.addAttribute("projects", projRepo.findAll());
         model.addAttribute("timeform", new TimeFrom());
