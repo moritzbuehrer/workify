@@ -1,7 +1,7 @@
 package com.workify.Workify.FormObjects;
 
 
-public class TimeFrom {
+public class TimeForm {
 
     private String projectId;
     private String comment;

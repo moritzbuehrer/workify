@@ -1,10 +1,9 @@
 package com.workify.Workify.Controller;
 
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import com.workify.Workify.Entity.Customer;
 import com.workify.Workify.Entity.Project;
 import com.workify.Workify.Entity.TimePiece;
-import com.workify.Workify.FormObjects.TimeFrom;
+import com.workify.Workify.FormObjects.TimeForm;
 import com.workify.Workify.Repository.CustomerRepository;
 import com.workify.Workify.Repository.ProjectRepository;
 import com.workify.Workify.Repository.TimePieceRepository;
@@ -13,15 +12,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,7 +34,7 @@ public class MainController {
 
 
     @RequestMapping(value = { "/setup" }, method = RequestMethod.GET)
-    public void setup() {
+    public String setup() {
 
         //Test Data
         Customer cust1 = new Customer("Moritz", "Bührer", "Bührer Inc.", "Kasierstuhlstr", "79279","Freiburg");
@@ -49,19 +44,36 @@ public class MainController {
         projRepo.save( new Project("Second Project", "Desc second Proj", cust1));
         projRepo.save( new Project("Third Project", "Desc third Proj", cust1));
 
+        return "index";
     }
 
     @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
     public String startPage(Model model) {
 
         model.addAttribute("projects", projRepo.findAll());
-        model.addAttribute("timeform", new TimeFrom());
+        model.addAttribute("timeform", new TimeForm());
 
         return "index";
     }
 
+    @RequestMapping(value = { "/deleteTime({id})" }, method = RequestMethod.GET)
+    public String deleteTime(@PathVariable("id") int id) {
+
+        System.out.println(id);
+
+        return "redirect:/timeView";
+    }
+
+    @RequestMapping(value = { "/time({id})" }, method = RequestMethod.GET)
+    public String viewTime(@PathVariable("id") int id) {
+
+        System.out.println(id);
+
+        return "redirect:/index";
+    }
+
     @RequestMapping(value = "/insertTime", method = RequestMethod.POST)
-    public String insertTime(@ModelAttribute("timeform") TimeFrom timeForm, BindingResult bindingResult){
+    public String insertTime(@ModelAttribute("timeform") TimeForm timeForm, BindingResult bindingResult){
 
         //Errorhandling
         if (bindingResult.hasErrors()){
@@ -99,7 +111,7 @@ public class MainController {
         //Insert to Database
         timeRepo.save(timePiece);
 
-        return "timeView";
+        return "redirect:/timeView";
     }
 
     @RequestMapping(value = {"/timeView"}, method = RequestMethod.GET)

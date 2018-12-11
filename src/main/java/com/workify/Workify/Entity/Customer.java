@@ -1,5 +1,8 @@
 package com.workify.Workify.Entity;
 
+import lombok.Data;
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.util.List;
 
