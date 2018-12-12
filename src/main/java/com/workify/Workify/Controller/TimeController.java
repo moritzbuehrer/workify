@@ -7,7 +7,6 @@ import com.workify.Workify.Repository.CustomerRepository;
 import com.workify.Workify.Repository.ProjectRepository;
 import com.workify.Workify.Repository.TimePieceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,23 +30,14 @@ public class TimeController {
     @Autowired
     CustomerRepository custRepo;
 
-    @RequestMapping(value = { "/insertTime" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/time/new" }, method = RequestMethod.GET)
     public String startPage(Model model) {
 
         model.addAttribute("projects", projRepo.findAll());
         model.addAttribute("timeform", new TimeForm());
 
-        return "insertTime";
+        return "timePages/insertTime";
     }
-
-    @RequestMapping(value = { "/deleteTime({id})" }, method = RequestMethod.GET)
-    public String deleteTime(@PathVariable("id") int id) {
-
-        System.out.println(id);
-
-        return "redirect:/timeView";
-    }
-
 
     @RequestMapping(value = "/insertTime", method = RequestMethod.POST)
     public String insertTime(@ModelAttribute("timeform") TimeForm timeForm, BindingResult bindingResult){
@@ -88,17 +78,16 @@ public class TimeController {
         //Insert to Database
         timeRepo.save(timePiece);
 
-        return "redirect:/timeView";
+        return "redirect:/times";
     }
 
-    @RequestMapping(value = {"/timeView"}, method = RequestMethod.GET)
-    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = {"/times"}, method = RequestMethod.GET)
     public String timeView(Model model){
 
         List<TimePiece> timePieces = timeRepo.findAll();
 
         model.addAttribute("tableEntries", timePieces);
 
-        return "timeView";
+        return "timePages/timeView";
     }
 }
