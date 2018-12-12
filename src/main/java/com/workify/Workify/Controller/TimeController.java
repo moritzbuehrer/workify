@@ -1,6 +1,5 @@
 package com.workify.Workify.Controller;
 
-import com.workify.Workify.Entity.Customer;
 import com.workify.Workify.Entity.Project;
 import com.workify.Workify.Entity.TimePiece;
 import com.workify.Workify.FormObjects.TimeForm;
@@ -21,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-public class MainController {
+public class TimeController {
 
     @Autowired
     ProjectRepository projRepo;
@@ -32,28 +31,13 @@ public class MainController {
     @Autowired
     CustomerRepository custRepo;
 
-
-    @RequestMapping(value = { "/setup" }, method = RequestMethod.GET)
-    public String setup() {
-
-        //Test Data
-        Customer cust1 = new Customer("Moritz", "Bührer", "Bührer Inc.", "Kasierstuhlstr", "79279","Freiburg");
-        custRepo.save( cust1 );
-
-        projRepo.save( new Project("First Project", "Desc first Proj", cust1));
-        projRepo.save( new Project("Second Project", "Desc second Proj", cust1));
-        projRepo.save( new Project("Third Project", "Desc third Proj", cust1));
-
-        return "index";
-    }
-
-    @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/insertTime" }, method = RequestMethod.GET)
     public String startPage(Model model) {
 
         model.addAttribute("projects", projRepo.findAll());
         model.addAttribute("timeform", new TimeForm());
 
-        return "index";
+        return "insertTime";
     }
 
     @RequestMapping(value = { "/deleteTime({id})" }, method = RequestMethod.GET)
@@ -64,13 +48,6 @@ public class MainController {
         return "redirect:/timeView";
     }
 
-    @RequestMapping(value = { "/time({id})" }, method = RequestMethod.GET)
-    public String viewTime(@PathVariable("id") int id) {
-
-        System.out.println(id);
-
-        return "redirect:/index";
-    }
 
     @RequestMapping(value = "/insertTime", method = RequestMethod.POST)
     public String insertTime(@ModelAttribute("timeform") TimeForm timeForm, BindingResult bindingResult){
@@ -78,7 +55,7 @@ public class MainController {
         //Errorhandling
         if (bindingResult.hasErrors()){
             System.out.println(bindingResult.toString());
-            return "index";
+            return "insertTime";
         }
 
         //Handle Dates

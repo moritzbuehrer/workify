@@ -1,9 +1,9 @@
 package com.workify.Workify.Repository;
 
-import com.workify.Workify.Entity.Project;
-import org.springframework.data.repository.CrudRepository;
+        import com.workify.Workify.Entity.Project;
+        import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
+        import java.util.List;
 
 public interface ProjectRepository extends CrudRepository<Project, Long> {
 
