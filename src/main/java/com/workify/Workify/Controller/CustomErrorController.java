@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.thymeleaf.exceptions.TemplateInputException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ public class CustomErrorController implements ErrorController {
 
     @RequestMapping("/error" )
     public String newCustomer(HttpServletRequest request) {
+        /*
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 
         if (status != null) {
@@ -28,13 +30,14 @@ public class CustomErrorController implements ErrorController {
                 return "errorPages/error_500";
             }
         }
-
+        */
         return "errorPages/error_404";
+
+
     }
 
     @Override
     public String getErrorPath() {
-        System.out.println("HALLO");
         return "/error";
     }
 }
