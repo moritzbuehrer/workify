@@ -23,7 +23,6 @@ public class Project {
     @OneToMany(mappedBy = "project")
     private List<TimePiece> timePieces;
 
-
     public Project(){}
 
     public Project(String name, String description, Customer customer) {

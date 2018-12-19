@@ -40,6 +40,7 @@ public class TimeController {
         return "timePages/insertTime";
     }
 
+
     @RequestMapping(value = "/insertTime", method = RequestMethod.POST)
     public String insertTime(@ModelAttribute("timeform") TimeForm timeForm, BindingResult bindingResult){
 
@@ -71,8 +72,8 @@ public class TimeController {
         double differenceHours = difference/3600000.0;
 
         //Get Project
-        Optional<Project> project = projRepo.findById( Long.parseLong(timeForm.getProjectId()) );
-        Project pro = project.get();
+        Optional<Project> optProject = projRepo.findById( Long.parseLong(timeForm.getProjectId()) );
+        Project pro = optProject.get();
 
         TimePiece timePiece = new TimePiece(timeForm.getComment(), date, differenceHours, pro);
 
@@ -89,6 +90,14 @@ public class TimeController {
 
         model.addAttribute("tableEntries", timePieces);
 
-        return "timePages/timeView";
+        return "timePages/viewTimes";
+    }
+
+    @RequestMapping(value = { "/time/delete/{id}" }, method = RequestMethod.GET)
+    public String deleteProjects(@PathVariable("id") int id){
+
+        timeRepo.deleteById((long) id);
+
+        return "redirect:/times";
     }
 }
