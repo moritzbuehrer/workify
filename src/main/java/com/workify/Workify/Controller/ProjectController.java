@@ -27,7 +27,7 @@ public class ProjectController {
     ProjectRepository projRepo;
 
     @RequestMapping(value = { "/project/new" }, method = RequestMethod.GET)
-    public String project(Model model){
+    public String newProject(Model model){
 
         model.addAttribute("projectform", new ProjectForm());
         model.addAttribute("customers", custRepo.findAll());
@@ -53,11 +53,5 @@ public class ProjectController {
         return "";
     }
 
-
-    @RequestMapping(value = { "/deleteProject({id})" }, method = RequestMethod.GET)
-    public String deleteProjects(@PathVariable("id") int id){
-
-        return "";
-    }
 
 }

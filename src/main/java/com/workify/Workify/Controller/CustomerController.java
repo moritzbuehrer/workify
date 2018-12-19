@@ -23,7 +23,7 @@ public class CustomerController {
     CustomerRepository custRepo;
 
     @RequestMapping(value = { "/customer/new" }, method = RequestMethod.GET)
-    public String insterCustomer(Model model) {
+    public String newCustomer(Model model) {
 
         model.addAttribute("customerform", new CustomerForm());
 

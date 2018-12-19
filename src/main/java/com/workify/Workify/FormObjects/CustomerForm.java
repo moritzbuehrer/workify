@@ -13,8 +13,4 @@ public class CustomerForm {
     private String postcode;
     private String city;
 
-    public CustomerForm(){
-
-    }
-
 }
