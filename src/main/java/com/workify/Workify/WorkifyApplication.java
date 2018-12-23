@@ -17,22 +17,21 @@ public class WorkifyApplication {
 		SpringApplication.run(WorkifyApplication.class, args);
 	}
 
-	/*
+
 	@Bean
 	CommandLineRunner runner(ProjectRepository ProjRepo, CustomerRepository CustRepo){
 		return args -> {
 
-			Customer customer = new Customer("Moritz", "Buhrer", "SAP", "asd", "asd", "asd");
+			//Mock Customer
+			Customer customer = new Customer("Moritz", "Buhrer", "SAP", "Nancystr. 22", "76187", "Karlsruhe");
 			CustRepo.save(customer);
 
-			Project project = new Project();
-			project.setCustomer(customer);
-
+			//Mock Project
+			Project project = new Project("Projekt 1", "Beschreibung", customer);
 			ProjRepo.save(project);
-
 
 		};
 	}
-	*/
+
 
 }

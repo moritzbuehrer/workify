@@ -7,6 +7,8 @@ import com.workify.Workify.Repository.CustomerRepository;
 import com.workify.Workify.Repository.ProjectRepository;
 import com.workify.Workify.Repository.TimePieceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -75,7 +77,11 @@ public class TimeController {
         Optional<Project> optProject = projRepo.findById( Long.parseLong(timeForm.getProjectId()) );
         Project pro = optProject.get();
 
-        TimePiece timePiece = new TimePiece(timeForm.getComment(), date, differenceHours, pro);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        System.out.println(username);
+
+        TimePiece timePiece = new TimePiece(timeForm.getComment(), date, differenceHours, pro, "User1");
 
         //Insert to Database
         timeRepo.save(timePiece);
