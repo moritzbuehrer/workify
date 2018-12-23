@@ -19,18 +19,18 @@ public class TimePiece {
     @JoinColumn(name = "project_id")
     private Project project;
 
-    private String userName;
+    private String username;
 
     public TimePiece(){
 
     }
 
-    public TimePiece(String comment, Date date, double duration, Project project, String userName) {
+    public TimePiece(String comment, Date date, double duration, Project project, String username) {
         this.comment = comment;
         this.date = date;
         this.duration = duration;
         this.project = project;
-        this.userName = userName;
+        this.username = username;
     }
 
 }

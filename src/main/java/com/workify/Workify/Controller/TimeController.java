@@ -2,10 +2,12 @@ package com.workify.Workify.Controller;
 
 import com.workify.Workify.Entity.Project;
 import com.workify.Workify.Entity.TimePiece;
+import com.workify.Workify.Entity.TrackerStatus;
 import com.workify.Workify.FormObjects.TimeForm;
 import com.workify.Workify.Repository.CustomerRepository;
 import com.workify.Workify.Repository.ProjectRepository;
 import com.workify.Workify.Repository.TimePieceRepository;
+import com.workify.Workify.Repository.TrackerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,6 +33,9 @@ public class TimeController {
 
     @Autowired
     CustomerRepository custRepo;
+
+    @Autowired
+    TrackerRepository trackerRepo;
 
 
     @RequestMapping(value = { "/time/new" }, method = RequestMethod.GET)
@@ -97,6 +102,25 @@ public class TimeController {
         model.addAttribute("tableEntries", timePieces);
 
         return "timePages/viewTimes";
+    }
+
+    @RequestMapping(value = { "/activityTracker" }, method = RequestMethod.GET)
+    public String trackTime(Model model){
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        List<TrackerStatus> trackerStatusList = trackerRepo.findByUsername(auth.getName());
+        if (trackerStatusList.isEmpty()){
+            //No Tracking started
+
+        } else{
+            //Tracking started --> Get time and save activity
+
+        }
+
+        model.addAttribute("trackingstatus", null );
+
+        return "";
     }
 
     @RequestMapping(value = { "/time/delete/{id}" }, method = RequestMethod.GET)
